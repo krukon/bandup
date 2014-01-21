@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140121173211) do
+ActiveRecord::Schema.define(version: 20140121182331) do
 
   create_table "artist_band_relations", force: true do |t|
     t.integer  "artist_id"
@@ -40,6 +40,12 @@ ActiveRecord::Schema.define(version: 20140121173211) do
   create_table "bands", force: true do |t|
     t.string   "name"
     t.string   "about"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "instruments", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
