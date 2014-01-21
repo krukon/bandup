@@ -22,4 +22,9 @@ describe Artist do
   it { should be_valid }
   it { should_not be_admin }
 
+  describe "should have band relations" do
+  	it { should respond_to(:bands) }
+  	it { should respond_to(:band_relations) }
+  end
+
 end

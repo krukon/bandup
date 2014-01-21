@@ -13,4 +13,9 @@ describe Band do
 
 	it { should be_valid }
 
+  describe "should have artist relations" do
+  	it { should respond_to(:artists) }
+  	it { should respond_to(:artist_relations) }
+  end
+
 end
