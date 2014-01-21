@@ -27,4 +27,8 @@ describe Artist do
   	it { should respond_to(:band_relations) }
   end
 
+  describe "should have instrument relations" do
+  	it { should respond_to(:instruments) }
+  end
+
 end
