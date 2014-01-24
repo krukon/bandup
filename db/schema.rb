@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140121182819) do
+ActiveRecord::Schema.define(version: 20140124144838) do
 
   create_table "artist_band_relations", force: true do |t|
     t.integer  "artist_id"
@@ -23,12 +23,23 @@ ActiveRecord::Schema.define(version: 20140121182819) do
 
   add_index "artist_band_relations", ["artist_id", "band_id"], name: "index_artist_band_relations_on_artist_id_and_band_id", unique: true
 
+  create_table "artist_genre_relations", force: true do |t|
+    t.integer  "artist_id"
+    t.integer  "genre_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "artist_genre_relations", ["artist_id", "genre_id"], name: "index_artist_genre_relations_on_artist_id_and_genre_id", unique: true
+
   create_table "artist_instrument_relations", force: true do |t|
     t.integer  "artist_id"
     t.integer  "instrument_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "artist_instrument_relations", ["artist_id", "instrument_id"], name: "uniqueness", unique: true
 
   create_table "artists", force: true do |t|
     t.string   "email"
@@ -47,6 +58,12 @@ ActiveRecord::Schema.define(version: 20140121182819) do
   create_table "bands", force: true do |t|
     t.string   "name"
     t.string   "about"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "genres", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
