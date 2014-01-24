@@ -29,7 +29,12 @@ describe Artist do
 
   describe "should have instrument relations" do
     it { should respond_to(:instruments) }
-  	it { should respond_to(:instrument_relations) }
+    it { should respond_to(:instrument_relations) }
+  end
+
+  describe "should have genre relations" do
+    it { should respond_to(:genres) }
+    it { should respond_to(:genre_relations) }
   end
 
 end
