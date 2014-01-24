@@ -1,22 +1,40 @@
 require 'spec_helper'
 
 describe ArtistInstrumentRelation do
-	let(:artist) { Artist.create!(email: "test@email.com", password: "foo", password_confirmation: "foo") }
-	let(:instrument) { Instrument.create!(name: "instrument") }
-	let(:relation) { artist.instruments.build(instrument_id: instrument.id) }
+	before do
+		@artist = Artist.create!(email: "test@email.com", password: "foo", password_confirmation: "foo")
+		@instrument = Instrument.create!(name: "instrument")
+		@relation = @artist.instrument_relations.create!(instrument_id: @instrument.id)
+	end
+	#let(:artist) { Artist.create!(email: "test@email.com", password: "foo", password_confirmation: "foo") }
+	#let(:instrument) { Instrument.create!(name: "instrument") }
+	#let(:relation) { artist.instrument_relations.create!(instrument_id: instrument.id) }
 
-	subject { relation }
+	describe "Artist-Instrument relation" do
+		subject { @relation }
 
-	it { should be_valid }
+		it { should be_valid }
 
-	describe "when artist id is not present" do
-		before { relation.artist_id = nil }
-		it { should_not be_valid }
+		describe "when artist id is not present" do
+			before { @relation.artist_id = nil }
+			it { should_not be_valid }
+		end
+
+		describe "when instrument id is not present" do
+			before { @relation.instrument_id = nil }
+			it { should_not be_valid }
+		end
 	end
 
-	describe "when instrument id is not present" do
-		before { relation.instrument_id = nil }
-		it { should_not be_valid }
+	describe "Artist's instruments" do
+		subject { @artist.instruments }
+		before { @artist.reload }
+
+		it "should consist of one element" do
+			subject.length.should == 1
+			subject[0].should == @instrument
+		end
+
 	end
 
 end
