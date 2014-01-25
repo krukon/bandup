@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ArtistBandRelation do
 
-	let(:artist) { Artist.create!(email: "test@email.com", password: "foo", password_confirmation: "foo") }
+	let(:artist) { Artist.create!(username: "test", email: "test@email.com", password: "foobar") }
 	let(:band) { Band.create!(name: "The Test Band") }
 	let(:relation) { artist.band_relations.build(band_id: band.id, owner: true) }
 
