@@ -1,0 +1,65 @@
+<div class="container cover">
+	<h1>cover</h1>
+</div>
+<div class="container artist-profile">
+	<div class="row">
+		<div class="span12">
+			<% if @image != nil then %>
+				<div class="img-polaroid profile-picture-frame pull-left">
+					<div class="profile-picture" style="background-image: url('/assets/<%= @image %>');">
+					</div>
+				</div>
+			<% end %>
+			<% if @artist.stage_name.to_s != "" then %>
+				<h1><%= @artist.stage_name %></h1>
+			<% end %>
+			<h3><%= @artist.first_name + " " + @artist.last_name %></h3>
+			<h4>Age: 32</h4>
+			<h4>Location: Pittsburgh, PA</h4>
+			<h5>
+				<i class="icon icon-facebook-sign facebook"> </i>
+				<a href="">facebook.com/jackjenkins/</a>
+			</h5>
+			<h5>
+				<i class="icon icon-youtube-play youtube"> </i>
+				<a href="">youtube.com/jackjenkins/</a>
+			</h5>
+			<h5>
+				<i class="icon icon-vimeo vimeo"> </i>
+				<a href="">vimeo.com/jackjenkins/</a>
+			</h5>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span12">
+			<h2 class="section"><i class="icon icon-group"></i>Bands</h2>
+			<ul class="icons-ul">
+				<li><i class="icon-li icon icon-check"></i>Band #1 (2012 - *): Electric guitar</li>
+				<li><i class="icon-li icon icon-check"></i>Band #2 (2010 - *): Bass</li>
+				<li><i class="icon-li icon icon-unchecked"></i>Band #3 (2007 - 2010): Vocal + Electric guitar</li>
+			</ul>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span12">
+			<h2 class="section"><i class="icon icon-microphone"></i>Instruments &amp; Roles</h2>
+			<ul class="icons-ul">
+				<li><i class="icon-li icon icon-check"></i>Classical guitar</li>
+				<li><i class="icon-li icon icon-check"></i>Electric guitar</li>
+				<li><i class="icon-li icon icon-check"></i>Bass</li>
+				<li><i class="icon-li icon icon-check"></i>Vocal</li>
+			</ul>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span12">
+			<h2 class="section"><i class="icon icon-music"></i>Favourite genres</h2>
+			<ul class="icons-ul">
+				<li><i class="icon-li icon icon-check"></i>Rock</li>
+				<li><i class="icon-li icon icon-check"></i>Alternative Rock</li>
+				<li><i class="icon-li icon icon-check"></i>Metal</li>
+				<li><i class="icon-li icon icon-check"></i>Heavy metal</li>
+			</ul>
+		</div>
+	</div>
+</div>
