@@ -4,30 +4,7 @@
 <div class="container artist-profile">
 	<div class="row">
 		<div class="span12">
-			<% if @image != nil then %>
-				<div class="img-polaroid profile-picture-frame pull-left">
-					<div class="profile-picture" style="background-image: url('/assets/<%= @image %>');">
-					</div>
-				</div>
-			<% end %>
-			<% if @artist.stage_name.to_s != "" then %>
-				<h1><%= @artist.stage_name %></h1>
-			<% end %>
-			<h3><%= @artist.first_name + " " + @artist.last_name %></h3>
-			<h4>Age: 32</h4>
-			<h4>Location: Pittsburgh, PA</h4>
-			<h5>
-				<i class="icon icon-facebook-sign facebook"> </i>
-				<a href="">facebook.com/jackjenkins/</a>
-			</h5>
-			<h5>
-				<i class="icon icon-youtube-play youtube"> </i>
-				<a href="">youtube.com/jackjenkins/</a>
-			</h5>
-			<h5>
-				<i class="icon icon-vimeo vimeo"> </i>
-				<a href="">vimeo.com/jackjenkins/</a>
-			</h5>
+			<%= render 'profile_info' %>
 		</div>
 	</div>
 	<div class="row">
@@ -42,7 +19,8 @@
 	</div>
 	<div class="row">
 		<div class="span12">
-			<h2 class="section"><i class="icon icon-microphone"></i>Instruments &amp; Roles</h2>
+			<h2 class="section"><i class="icon icon-microphone"></i>Instruments &amp; Roles
+				&#xf194;</h2>
 			<ul class="icons-ul">
 				<li><i class="icon-li icon icon-check"></i>Classical guitar</li>
 				<li><i class="icon-li icon icon-check"></i>Electric guitar</li>

@@ -1,0 +1,36 @@
+<% if @image != nil then %>
+	<div class="img-polaroid profile-picture-frame pull-left">
+		<div class="profile-picture" style="background-image: url('/assets/<%= @image %>');">
+		</div>
+	</div>
+<% end %>
+
+<% if @artist.stage_name.to_s != "" then %>
+	<h1><%= @artist.stage_name %></h1>
+<% end %>
+
+<h3><%= @artist.first_name + " " + @artist.last_name %></h3>
+<h4>Age: <%= @age %></h4>
+<h4>Location: <%= @location %></h4>
+
+<% if @link_facebook then %>
+	<h5>
+		<i class="icon icon-facebook-sign link facebook"></i>
+		<a href="<%= @link_facebook %>"><%= extract_link @link_facebook %></a>
+	</h5>
+<% end %>
+
+<% if @link_youtube then %>
+	<h5>
+		<i class="icon icon-youtube-play link youtube"></i>
+		<a href="<%= @link_youtube %>"><%= extract_link @link_youtube %></a>
+	</h5>
+<% end %>
+
+<% if @link_website then %>
+	<h5>
+		<i class="icon icon-globe link website"></i>
+		<a href="<%= @link_website %>"><%= extract_link @link_website, false %></a>
+	</h5>
+<% end %>
+</ul>
