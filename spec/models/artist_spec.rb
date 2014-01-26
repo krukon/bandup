@@ -4,7 +4,7 @@ describe Artist do
 
   before do
   	@artist = Artist.new(username: "fake", email: "fake@email.com", first_name: "First",
-  							last_name: "Last", stage_name: "Stage", password: "P@ssw0rd")
+  							last_name: "Last", stage_name: "Stage", password: "P@ssw0rd", birthday: DateTime.now)
   end
 
  	subject { @artist }
@@ -17,6 +17,12 @@ describe Artist do
   it { should respond_to(:email) }
   it { should respond_to(:password) }
   it { should respond_to(:password_digest) }
+  it { should respond_to(:birthday) }
+  it { should respond_to(:location_city) }
+  it { should respond_to(:location_state) }
+  it { should respond_to(:link_facebook) }
+  it { should respond_to(:link_youtube) }
+  it { should respond_to(:link_website) }
 
   it { should be_valid }
   it { should_not be_admin }
@@ -58,14 +64,14 @@ describe Artist do
 
   describe "with not unique email" do
     before { Artist.create(username: "unique", email: "fake@email.com",
-                            password: "pass") }
+                            password: "pass", birthday: DateTime.now) }
 
     it { should_not be_valid }
   end
 
   describe "with not unique username" do
     before { Artist.create(username: "fake", email: "unique@email.com",
-                            password: "pass") }
+                            password: "pass", birthday: DateTime.now) }
     
     it { should_not be_valid }
   end

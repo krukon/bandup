@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ArtistInstrumentRelation do
 	before do
-		@artist = Artist.create!(username: "test", email: "test@email.com", password: "foobar")
+		@artist = Artist.create!(username: "test", email: "test@email.com", password: "foobar", birthday: DateTime.now)
 		@instrument = Instrument.create!(name: "instrument")
 		@relation = @artist.instrument_relations.create!(instrument_id: @instrument.id)
 	end

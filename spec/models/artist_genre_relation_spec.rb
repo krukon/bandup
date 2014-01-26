@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ArtistGenreRelation do
 	before do
-		@artist = Artist.create!(username: "test", email: "test@email.com", password: "foobar")
+		@artist = Artist.create!(username: "test", email: "test@email.com", password: "foobar", birthday: DateTime.now)
 		@genre = Genre.create!(name: "genre")
 		@relation = @artist.genre_relations.create!(genre_id: @genre.id)
 	end

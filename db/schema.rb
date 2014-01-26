@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140125132938) do
+ActiveRecord::Schema.define(version: 20140125193528) do
 
   create_table "artist_band_relations", force: true do |t|
     t.integer  "artist_id"
@@ -52,6 +52,12 @@ ActiveRecord::Schema.define(version: 20140125132938) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "username"
+    t.datetime "birthday"
+    t.string   "location_city"
+    t.string   "location_state"
+    t.string   "link_facebook"
+    t.string   "link_youtube"
+    t.string   "link_website"
   end
 
   add_index "artists", ["email"], name: "index_artists_on_email", unique: true
