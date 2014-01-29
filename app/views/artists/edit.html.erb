@@ -1,0 +1,49 @@
+<h1>Edit your profile</h1>
+
+<div class="row">
+	<div class="span6 offset3">
+		<%= form_for(@artist, url: { action: :update, id: @artist.username }) do |f| %>
+			<%= f.label :username %>
+			<%= f.text_field :username, disabled: true %>
+
+			<%= f.label :email %>
+			<%= f.text_field :email %>
+
+			<%= f.label :password %>
+			<%= f.password_field :password %>
+
+			<%= f.label :first_name %>
+			<%= f.text_field :first_name %>
+
+			<%= f.label :last_name %>
+			<%= f.text_field :last_name %>
+
+			<%= f.label :stage_name %>
+			<%= f.text_field :stage_name %>
+
+			<%= f.label :location_city %>
+			<%= f.text_field :location_city %>
+
+			<%= f.label :location_state %>
+			<%= f.text_field :location_state %>
+
+			<%= f.label :link_facebook %>
+			<%= f.text_field :link_facebook %>
+
+			<%= f.label :link_youtube %>
+			<%= f.text_field :link_youtube %>
+
+			<%= f.label :link_website %>
+			<%= f.text_field :link_website %>
+		
+			<%= f.label :birthday %>
+			<%= f.date_select :birthday, start_year: 1940, end_year: Time.now.year %>
+
+			<% if f.object.errors[:birthday].count > 0 then %>
+				<span class="text-error"><%= f.object.errors.full_messages_for(:birthday)[0] %></span>
+			<% end %>
+
+			<%= f.submit "Submit changes", class: "btn btn-large btn-primary" %>
+		<% end %>
+	</div>
+</div>

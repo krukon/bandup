@@ -5,13 +5,21 @@
 	</div>
 <% end %>
 
-<% if @artist.stage_name.to_s != "" then %>
+<% if !@artist.stage_name.blank? then %>
 	<h1><%= @artist.stage_name %></h1>
 <% end %>
 
-<h3><%= @artist.first_name + " " + @artist.last_name %></h3>
-<h4>Age: <%= @age %></h4>
-<h4>Location: <%= @location %></h4>
+<% name = get_name @artist %>
+<% if !name.blank? then %>
+	<h3><%= name %></h3>
+<% end %>
+<% if @age then %>
+	<h4>Age: <%= @age %></h4>
+<% end %>
+<% location = get_location @artist %>
+<% if !location.blank? then %>
+	<h4>Location: <%= location %></h4>
+<% end %>
 
 <% if @link_facebook then %>
 	<h5>

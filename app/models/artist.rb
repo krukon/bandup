@@ -19,5 +19,5 @@ class Artist < ActiveRecord::Base
   validates :email, presence:   true,
                     format:     { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
-  validates :birthday, presence: true
+  #validates :birthday, presence: true
 end

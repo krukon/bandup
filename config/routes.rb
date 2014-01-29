@@ -5,7 +5,8 @@ Bandup::Application.routes.draw do
   # You can have the root of your site routed with "root"
    root 'static#home'
 
-  resources :artists
+  resources :artists, only: [:index, :show, :get, :edit, :destroy, :new]
+  patch 'artists/:id/edit' => 'artists#update', as: 'update_artist'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
