@@ -1,0 +1,28 @@
+<div class="container">
+	<div class="row">
+		<div class="span6 offset3">
+			<h1>Edit Band</h1>
+			<%= link_to "Delete band", { controller: :bands, action: :destroy, id: @band.page },
+																method: :delete,
+																data: { confirm: "Are you sure?"},
+																class: "alert-text" %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span6 offset3">
+			<%= form_for(@band, url: { action: :update, id: @band.page }) do |f| %>
+				<%= render 'form_errors', object: f.object %>
+				<%= f.label :name, "Name of the Band" %>
+				<%= f.text_field :name %>
+
+				<%= f.label :about, "About Band" %>
+				<%= f.text_area :about %>
+
+				<%= f.label :established %>
+				<%= f.date_field :established %>
+
+				<%= f.submit "Submit changes", class: "btn btn-large btn-primary btn-submit" %>
+			<% end %>
+		</div>
+	</div>
+</div>
