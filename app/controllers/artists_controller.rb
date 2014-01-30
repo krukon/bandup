@@ -29,7 +29,7 @@ class ArtistsController < ApplicationController
 
     @artist = Artist.create!(username: username, email: email, password: password)
 
-    redirect_to_action :edit, id: @artist.username
+    redirect_to action: :edit, id: @artist.username
   end
 
   def edit
