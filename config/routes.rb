@@ -9,9 +9,12 @@ Bandup::Application.routes.draw do
   get 'signup' => 'artists#new', as: 'new_artist'
   patch 'artists/:id/edit' => 'artists#update', as: 'update_artist'
 
-  resources :bands, only: [:index, :show, :edit, :destroy, :create]
+  resources :bands, only: [:index, :show, :edit, :destroy],
+                    constraints: { id: /[\w\-\.\~]+/}
   get 'create-band' => 'bands#new', as: 'new_band'
-  patch 'bands/:id/edit' => 'bands#edit', as: 'update_band'
+  post 'create-band' => 'bands#create', as: 'create_band'
+  patch 'bands/:id/edit' => 'bands#update', as: 'update_band',
+                    constraints: { id: /[\w\-\.\~]+/}
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
