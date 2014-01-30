@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ArtistBandRelation do
 
 	let(:artist) { Artist.create!(username: "test", email: "test@email.com", password: "foobar", birthday: DateTime.now) }
-	let(:band) { Band.create!(name: "The Test Band") }
+	let(:band) { Band.create!(name: "The Test Band", page: "theTestBand") }
 	let(:relation) { artist.band_relations.build(band_id: band.id, owner: true) }
 
 	subject { relation }
