@@ -9,6 +9,7 @@ Bandup::Application.routes.draw do
   get 'signup' => 'artists#new', as: 'signup'
   patch 'artists/:id/edit' => 'artists#update', as: 'update_artist'
   get 'artists/:id/bands' => 'artists#bands', as: 'bands_of_artist'
+  get 'band-requests' => 'artists#band_requests', as: 'band_requests'
 
   resources :bands, only: [:index, :show, :edit, :destroy],
                     constraints: { id: /[\w\-\.\~]+/}
@@ -16,6 +17,8 @@ Bandup::Application.routes.draw do
   post 'create-band' => 'bands#create', as: 'create_band'
   patch 'bands/:id/edit' => 'bands#update', as: 'update_band',
                     constraints: { id: /[\w\-\.\~]+/}
+  post 'bands/:id/accept-request' => 'bands#accept_request', as: 'accept_band_request'
+  delete 'bands/:id/remove-request' => 'bands#remove_request', as: 'remove_band_request'
 
   # Session routes - signin, signout
   get 'signin' => 'session#new', as: 'signin'

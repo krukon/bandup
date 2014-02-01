@@ -1,5 +1,6 @@
 class ArtistsController < ApplicationController
   before_action :filter_correct_user, only: [:edit, :update]
+  before_action :filter_signed_in, only: [:band_requests]
 
   def index
 
@@ -57,6 +58,12 @@ class ArtistsController < ApplicationController
     @bands = @artist.bands
   end
 
+  def band_requests
+    @artist = current_user
+    @sent = @artist.band_requests.from_artist
+    @recieved = @artist.band_requests.from_band
+  end
+
   private
 
     def extract_date data, field
@@ -92,6 +99,10 @@ class ArtistsController < ApplicationController
     def filter_correct_user
       artist = Artist.find_by username: params[:id]
       redirect_to action: :show, id: artist.username unless current_user?(artist)
+    end
+
+    def filter_signed_in
+      signed_in?
     end
 
 end

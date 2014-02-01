@@ -3,6 +3,7 @@ class BandsController < ApplicationController
 
   before_action :filter_signed_in, only: [:new, :create]
   before_action :filter_owner, only: [:edit, :update, :destroy]
+  before_action :filter_has_request, only: [:accept_request, :remove_request]
 
   def index
 
@@ -91,6 +92,19 @@ class BandsController < ApplicationController
     redirect_to action: :index
   end
 
+  def accept_request
+    @request.destroy
+    @band.artist_relations.create(artist_id: @request.artist_id)
+    flash[:success] = "You just joined the band!"
+    redirect_to action: :show, id: @band.page
+  end
+
+  def remove_request
+    @request.destroy
+    flash[:info] = "Request removed."
+    redirect_to :back
+  end
+
   private
 
     def filter_signed_in
@@ -106,6 +120,16 @@ class BandsController < ApplicationController
       unless owner? band
         flash[:error] = "You do not have permissions to edit this band."
         redirect_to action: :show, id: band.page
+      end
+    end
+
+    def filter_has_request
+      @band = Band.where("lower(page) = ?", params[:id].downcase).take
+      @request = @band.artist_requests.where(artist_id: current_user.id).take
+      unless @request
+        flash[:error] = "Such request does not exist"
+        redirect_to :back
+        return
       end
     end
 

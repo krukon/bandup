@@ -1,0 +1,32 @@
+<h1>Band requests</h1>
+
+<% if @recieved.count > 0 then %>
+  <h3>Requests from Bands:</h3>
+  <ul>
+    <% @recieved.each do |e| %>
+      <li>
+        <%= link_to e.band.name, controller: :bands, action: :show,id: e.band.page %>
+        <%= link_to "Accept", { controller: :bands, action: :accept_request, id: e.band.page },
+                method: :post,
+                class: "btn btn-primary btn-small" %>
+        <%= link_to "Discard", { controller: :bands, action: :remove_request, id: e.band.page },
+                method: :delete,
+                class: "btn btn-secondary btn-small" %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if @sent.count > 0 then %>
+  <h3>Requests to Bands:</h3>
+  <ul>
+    <% @sent.each do |e| %>
+      <li>
+        <%= link_to e.band.name, controller: :bands, action: :show,id: e.band.page %>
+        <%= link_to "Remove", { controller: :bands, action: :remove_request, id: e.band.page },
+                method: :delete,
+                class: "btn btn-primary btn-small" %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
