@@ -12,4 +12,22 @@
       <p><%= @band.about %></p>
     </div>
   </div>
+  <div class="row">
+    <div class="span12">
+      <% if @band.artists.count > 0 then %>
+        <ul class="icons-ul">
+          <% for rel in @band.artist_relations do %>
+            <li>
+              <i class="icons-li icon-user"></i>
+              <%= link_to rel.artist.username,
+                      controller: :artists,
+                      action: :show,
+                      id: rel.artist.username %>
+              <%= " (owner)" if rel.owner %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
 </div>
