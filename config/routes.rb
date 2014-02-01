@@ -8,6 +8,7 @@ Bandup::Application.routes.draw do
   resources :artists, only: [:index, :show, :edit, :destroy, :create]
   get 'signup' => 'artists#new', as: 'signup'
   patch 'artists/:id/edit' => 'artists#update', as: 'update_artist'
+  get 'artists/:id/bands' => 'artists#bands', as: 'bands_of_artist'
 
   resources :bands, only: [:index, :show, :edit, :destroy],
                     constraints: { id: /[\w\-\.\~]+/}

@@ -1,12 +1,14 @@
-<%= nav_bar brand: "Band UP!", inverse: false do %>
-  <%= menu_group do %>
-    <%= menu_item "Home", root_path %>
-    <% if signed_in? then %>
-    	<%= menu_item "My profile", artist_path(id: current_user.username) %>
-    	<%= menu_item "My bands", "#" %>
-    	<%= menu_item "Sign out", signout_path, method: :delete %>
-    <% else %>
-    	<%= menu_item "Sign in!", signin_path %>
+<div class="container">
+  <%= nav_bar brand: "Band UP!", inverse: false do %>
+    <%= menu_group do %>
+      <%= menu_item "Home", root_path %>
+      <% if signed_in? then %>
+        <%= menu_item "My profile", artist_path(id: current_user.username) %>
+        <%= menu_item "My bands", bands_of_artist_path(id: current_user.username) %>
+        <%= menu_item "Sign out", signout_path, method: :delete %>
+      <% else %>
+        <%= menu_item "Sign in!", signin_path %>
+      <% end %>
     <% end %>
   <% end %>
-<% end %>
+</div>

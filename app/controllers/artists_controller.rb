@@ -51,6 +51,12 @@ class ArtistsController < ApplicationController
     end
   end
 
+  def bands
+    username = params[:id]
+    @artist = Artist.find_by(username: username)
+    @bands = @artist.bands
+  end
+
   private
 
     def extract_date data, field
