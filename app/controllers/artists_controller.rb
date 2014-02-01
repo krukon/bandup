@@ -1,4 +1,6 @@
 class ArtistsController < ApplicationController
+  before_action :filter_correct_user, only: [:edit, :update]
+
   def index
 
   end
@@ -40,22 +42,7 @@ class ArtistsController < ApplicationController
     username = params[:id]
     data = params[:artist]
     @artist = Artist.find_by(username: username)
-    @artist.email = data[:email]
-    @artist.first_name = data[:first_name]
-    @artist.last_name = data[:last_name]
-    @artist.stage_name = data[:stage_name]
-    @artist.location_city = data[:location_city]
-    @artist.location_state = data[:location_state]
-    @artist.link_facebook = extract_link data[:link_facebook]
-    @artist.link_youtube = extract_link data[:link_youtube]
-    @artist.link_website = extract_link data[:link_website]
-    @artist.birthday = extract_date data, :birthday
-    if @artist.birthday == nil then
-      @artist.errors.add :birthday, "date is invalid"
-      @artist.valid?
-      render 'edit'
-      return
-    end
+    save_attributes @artist, data
     if @artist.save then
       flash[:success] = "Profile updated."
       redirect_to action: :show, id: @artist.username
@@ -81,6 +68,24 @@ class ArtistsController < ApplicationController
     def extract_link link
       link = "http://" + link if !link.starts_with? "http://" and !link.starts_with? "https://"
       link
+    end
+
+    def save_attributes artist, data
+      artist.email = data[:email]
+      artist.first_name = data[:first_name]
+      artist.last_name = data[:last_name]
+      artist.stage_name = data[:stage_name]
+      artist.location_city = data[:location_city]
+      artist.location_state = data[:location_state]
+      artist.link_facebook = extract_link data[:link_facebook]
+      artist.link_youtube = extract_link data[:link_youtube]
+      artist.link_website = extract_link data[:link_website]
+      artist.birthday = extract_date data, :birthday
+    end
+
+    def filter_correct_user
+      artist = Artist.find_by username: params[:id]
+      redirect_to action: :show, id: artist.username unless current_user?(artist)
     end
 
 end

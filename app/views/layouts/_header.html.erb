@@ -1,6 +1,12 @@
-<%= nav_bar brand: "Band UP!", inverse: true do %>
+<%= nav_bar brand: "Band UP!", inverse: false do %>
   <%= menu_group do %>
     <%= menu_item "Home", root_path %>
-    <%= menu_item "Sign up!", "signup" %>
+    <% if signed_id? then %>
+    	<%= menu_item "My profile", artist_path(id: current_user.username) %>
+    	<%= menu_item "My bands", "#" %>
+    	<%= menu_item "Sign out", signout_path, method: :delete %>
+    <% else %>
+    	<%= menu_item "Sign in!", signin_path %>
+    <% end %>
   <% end %>
 <% end %>

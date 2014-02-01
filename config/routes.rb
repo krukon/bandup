@@ -6,7 +6,7 @@ Bandup::Application.routes.draw do
    root 'static#home'
 
   resources :artists, only: [:index, :show, :edit, :destroy, :create]
-  get 'signup' => 'artists#new', as: 'new_artist'
+  get 'signup' => 'artists#new', as: 'signup'
   patch 'artists/:id/edit' => 'artists#update', as: 'update_artist'
 
   resources :bands, only: [:index, :show, :edit, :destroy],
@@ -15,6 +15,11 @@ Bandup::Application.routes.draw do
   post 'create-band' => 'bands#create', as: 'create_band'
   patch 'bands/:id/edit' => 'bands#update', as: 'update_band',
                     constraints: { id: /[\w\-\.\~]+/}
+
+  # Session routes - signin, signout
+  get 'signin' => 'session#new', as: 'signin'
+  post 'signin' => 'session#create', as: 'create_session'
+  delete 'signout' => 'session#destroy', as: 'signout'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

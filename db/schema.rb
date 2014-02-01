@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140130132129) do
+ActiveRecord::Schema.define(version: 20140131145732) do
 
   create_table "artist_band_relations", force: true do |t|
     t.integer  "artist_id"
@@ -58,9 +58,11 @@ ActiveRecord::Schema.define(version: 20140130132129) do
     t.string   "link_facebook"
     t.string   "link_youtube"
     t.string   "link_website"
+    t.string   "remember_token"
   end
 
   add_index "artists", ["email"], name: "index_artists_on_email", unique: true
+  add_index "artists", ["remember_token"], name: "index_artists_on_remember_token"
   add_index "artists", ["username"], name: "index_artists_on_username", unique: true
 
   create_table "bands", force: true do |t|

@@ -20,4 +20,13 @@ class Artist < ActiveRecord::Base
                     format:     { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
   #validates :birthday, presence: true
+
+  def Artist.generate_token
+    SecureRandom.urlsafe_base64
+  end
+
+  def Artist.encrypt token
+    Digest::SHA1.hexdigest token.to_s
+  end
+
 end

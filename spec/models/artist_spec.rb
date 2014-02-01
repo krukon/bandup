@@ -23,6 +23,7 @@ describe Artist do
   it { should respond_to(:link_facebook) }
   it { should respond_to(:link_youtube) }
   it { should respond_to(:link_website) }
+  it { should respond_to(:remember_token) }
 
   it { should be_valid }
   it { should_not be_admin }
