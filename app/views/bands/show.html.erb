@@ -2,7 +2,9 @@
   <div class="row">
     <div class="span12">
       <h1><%= @band.name %></h1>
-      <%= link_to "Edit", controller: :bands, action: :edit, id: @band.page %>
+      <% if owner? @band then %>
+        <%= link_to "Edit", controller: :bands, action: :edit, id: @band.page %>
+      <% end %>
     </div>
   </div>
   <div class="row">

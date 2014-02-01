@@ -14,7 +14,7 @@ class SessionController < ApplicationController
         # TODO sign in user + redirect to the previous url
         sign_in artist
         flash[:success] = "You are signed in as " + artist.username
-        redirect_to controller: :artists, action: :show, id: artist.username
+        redirect_back_or controller: :artists, action: :show, id: artist.username
         return
       else
         flash[:error] = "Incorrect password"

@@ -1,2 +1,4 @@
 <h1>Band's index</h1>
-<%= link_to "Create new band!", action: :new %>
+<% if signed_in? then %>
+	<%= link_to "Create new band!", action: :new %>
+<% end %>

@@ -1,4 +1,8 @@
 class BandsController < ApplicationController
+  include BandsHelper
+
+  before_action :filter_signed_in, only: [:new, :create]
+  before_action :filter_owner, only: [:edit, :update, :destroy]
 
   def index
 
@@ -30,6 +34,7 @@ class BandsController < ApplicationController
     @band = Band.new(name: name, page: page, established: established)
 
     if @band.save then
+      current_user.band_relations.create(band_id: @band.id, owner: true)
       flash[:success] = "Band created successfully."
       redirect_to action: :show, id: @band.page
       return
@@ -85,5 +90,23 @@ class BandsController < ApplicationController
     end
     redirect_to action: :index
   end
+
+  private
+
+    def filter_signed_in
+      unless signed_in?
+        flash[:info] = "You have to sign in first."
+        store_location
+        redirect_to controller: :session, action: :new
+      end
+    end
+
+    def filter_owner
+      band = Band.where("lower(page) = ?", params[:id].downcase).take
+      unless owner? band
+        flash[:error] = "You do not have permissions to edit this band."
+        redirect_to action: :show, id: band.page
+      end
+    end
 
 end

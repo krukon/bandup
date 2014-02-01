@@ -7,7 +7,7 @@ module SessionHelper
     self.current_user = user
   end
 
-  def signed_id?
+  def signed_in?
     current_user != nil
   end
 
@@ -29,8 +29,8 @@ module SessionHelper
     cookies.delete :remember_token
   end
 
-  def signed_id_user
-    unless signed_id?
+  def signed_in_user
+    unless signed_in?
       store_location
       redirect_to signin_url, notice: "Log in to proceed"
     end
