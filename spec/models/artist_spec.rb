@@ -29,8 +29,12 @@ describe Artist do
   it { should_not be_admin }
 
   describe "should have band relations" do
-  	it { should respond_to(:bands) }
-  	it { should respond_to(:band_relations) }
+    it { should respond_to(:bands) }
+    it { should respond_to(:band_relations) }
+  end
+
+  describe "should have band join requests" do
+    it { should respond_to(:band_requests) }
   end
 
   describe "should have instrument relations" do

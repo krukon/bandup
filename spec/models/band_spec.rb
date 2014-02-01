@@ -18,8 +18,12 @@ describe Band do
 	it { should be_valid }
 
   describe "should have artist relations" do
-  	it { should respond_to(:artists) }
-  	it { should respond_to(:artist_relations) }
+    it { should respond_to(:artists) }
+    it { should respond_to(:artist_relations) }
+  end
+
+  describe "should have artist join requests" do
+    it { should respond_to(:artist_requests) }
   end
 
   describe "with allowed characters" do

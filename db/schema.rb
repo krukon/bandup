@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140131145732) do
+ActiveRecord::Schema.define(version: 20140201135441) do
+
+  create_table "artist_band_join_requests", force: true do |t|
+    t.integer  "artist_id"
+    t.integer  "band_id"
+    t.boolean  "artist_accepted", default: false
+    t.boolean  "band_accepted",   default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "artist_band_join_requests", ["artist_id"], name: "index_artist_band_join_requests_on_artist_id"
+  add_index "artist_band_join_requests", ["band_id"], name: "index_artist_band_join_requests_on_band_id"
 
   create_table "artist_band_relations", force: true do |t|
     t.integer  "artist_id"
