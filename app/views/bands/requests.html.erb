@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="span8 offset2">
+    <h1><%= @band.name %> - Membership requests</h1>
+    <h3>Invite</h3>
+    <%= form_for :invitation, url: invite_artist_path(id: @band.page) do |f| %>
+      <%= f.text_field :username, placeholder: "Username of Artist to invite", name: "username" %>
+      <%= f.submit "Invite", class: "btn btn-primary" %>
+    <% end %>
+    <h3>Received from artists</h3>
+    <ul>
+      <% @received.each do |e| %>
+        <li>
+          <%= link_to e.artist.get_printable_name, artist_path(e.artist.username) %>
+          <%= link_to "Accept",
+                  accept_request_to_band_path(id: @band.page, username: e.artist.username),
+                  class: "btn btn-primary btn-small",
+                  method: :post %>
+          <%= link_to "Discard",
+                  remove_request_to_band_path(id: @band.page, username: e.artist.username),
+                  class: "btn btn-small",
+                  method: :delete %>
+        </li>
+      <% end %>
+    </ul>
+    <h3>Sent to artists</h3>
+    <ul>
+      <% @sent.each do |e| %>
+        <li>
+          <%= link_to e.artist.get_printable_name, artist_path(e.artist.username) %>
+          <%= link_to "Remove",
+                  remove_invitation_to_band_path(id: @band.page, username: e.artist.username),
+                  class: "btn btn-primary btn-small",
+                  method: :delete %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<ul class="icons-ul">
+  <% @band.artists.each do |e| %>
+    <li>
+      <i class="icon-li icon-user"></i>
+      <% link_text = e.get_full_name %>
+      <% link_text = e.username if link_text.blank? %>
+      <%= link_to link_text, artist_path(id: e.username) %>
+      <%= link_to("(Remove from band)",
+            remove_artist_from_band_path(id: @band.page, username: e.username),
+            method: :delete,
+            class: "pull-right") unless e == current_user %>
+    </li>
+  <% end %>
+</ul>

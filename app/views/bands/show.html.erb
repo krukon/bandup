@@ -3,12 +3,20 @@
     <div class="span12">
       <h1><%= @band.name %></h1>
       <% if owner? @band then %>
-        <%= link_to "Edit", edit_band_path(id: @band.page) %>
+        <%= link_to "Edit", edit_band_path(id: @band.page) %><br/>
+        <%= link_to "Membership requests", band_requests_path(id: @band.page) %>
       <% end %>
       <% unless member? @band or requested? @band %>
-        <%= link_to "Try to join the band!", join_request_path(id: @band.page),
+        <%= link_to "Try to join the band!", send_band_request_path(id: @band.page),
                 method: :post %>
       <% end %>
+      <% if member? @band then %>
+        <%= link_to "Leave this band", leave_band_path(id: @band.page),
+                class: "btn btn-small btn-danger",
+                method: :delete %> 
+      <% end %>
+      <br/>
+      <%= link_to "See the members of this band", band_members_path %>
     </div>
   </div>
   <div class="row">

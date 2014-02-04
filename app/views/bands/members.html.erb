@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="span8 offset2">
+    <h1><%= @band.name %> - Members</h1>
+    <h3>This band has <%= pluralize(@band.artists.count, "artist") %></h3>
+    <% if owner? @band then %>
+      <%= render 'owner_members' %>
+    <% else %>
+      <ul class="icons-ul">
+        <% @band.artists.each do |e| %>
+          <li>
+            <i class="icon-li icon-user"></i>
+            <% link_text = e.get_full_name %>
+            <% link_text = e.username if link_text.blank? %>
+            <%= link_to link_text, artist_path(id: e.username) %>
+          </li>
+        <% end %>
+      </ul>
+      <br/>
+    <% end %>
+    <%= link_to "Back to the band", band_path(@band.page) %>
+  </div>
+</div>

@@ -17,18 +17,22 @@ Bandup::Application.routes.draw do
   patch 'bands/:id/edit' => 'bands#update', as: 'update_band', id: /[\w\-\.\~]+/
 
   # Artist: Band request/invitation routes
-  get    'band-requests'          => 'artists#band_requests',          as: 'band_requests'
-  post   'bands/:id/join'         => 'bands#join_request',             as: 'send_band_request'
+  get    'band-requests'          => 'artists#band_requests',          as: 'requests_to_band'
   post   'invitations/:id/accept' => 'artists#accept_band_invitation', as: 'accept_band_invitation'
+  post   'bands/:id/join'         => 'bands#join_request',             as: 'send_band_request'
+  delete 'bands/:id/leave'        => 'bands#leave_band',               as: 'leave_band'
   delete 'requests/:id/remove'    => 'artists#remove_band_request',    as: 'remove_band_request'
   delete 'invitations/:id/remove' => 'artists#remove_band_invitation', as: 'remove_band_invitation'
 
   # Band->Artist request/invitation routes
   scope 'bands/:id' do
-    post   'invite/:username'             => 'bands#invite_artist',  as: 'invite_artist'
-    #post   'requests/:username/accept'    => 'bands#accept_request', as: 'accept_request_to_band'
-    #delete 'invitations/:username/remove' => 'bands#remove_request', as: 'invite_artist'
-    #delete 'requests/:username/remove'    => 'bands#remove_request', as: 'invite_artist'
+    get    'requests'                     => 'bands#requests',          as: 'band_requests'
+    get    'members'                      => 'bands#members',           as: 'band_members'
+    post   'invite'                       => 'bands#invite_artist',     as: 'invite_artist'
+    post   'requests/:username/accept'    => 'bands#accept_request',    as: 'accept_request_to_band'
+    delete 'members/:username'            => 'bands#remove_member',     as: 'remove_artist_from_band'
+    delete 'invitations/:username/remove' => 'bands#remove_invitation', as: 'remove_invitation_to_band'
+    delete 'requests/:username/remove'    => 'bands#remove_request',    as: 'remove_request_to_band'
   end
 
   # Session routes - signin, signout
