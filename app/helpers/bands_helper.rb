@@ -7,13 +7,11 @@ module BandsHelper
 		) != nil
 	end
 
-	def member? band, user=nil
-		user ||= current_user
+	def member? band, user=current_user
 		band.artist_relations.find_by(artist_id: user.id)
 	end
 
-	def requested? band, user=nil
-		user ||= current_user
+	def requested? band, user=current_user
 		band.artist_requests.find_by(artist_id: user.id)
 	end
 

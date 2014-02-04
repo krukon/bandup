@@ -3,24 +3,33 @@ Bandup::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root 'static#home'
+  root 'static#home'
 
   resources :artists, only: [:index, :show, :edit, :destroy, :create]
   get 'signup' => 'artists#new', as: 'signup'
   patch 'artists/:id/edit' => 'artists#update', as: 'update_artist'
   get 'artists/:id/bands' => 'artists#bands', as: 'bands_of_artist'
-  get 'band-requests' => 'artists#band_requests', as: 'band_requests'
 
-  resources :bands, only: [:index, :show, :edit, :destroy],
-                    constraints: { id: /[\w\-\.\~]+/}
-  get 'create-band' => 'bands#new', as: 'new_band'
-  post 'create-band' => 'bands#create', as: 'create_band'
-  patch 'bands/:id/edit' => 'bands#update', as: 'update_band',
-                    constraints: { id: /[\w\-\.\~]+/}
-  post 'bands/:id/accept-request' => 'bands#accept_request', as: 'accept_band_request'
-  delete 'bands/:id/remove-request' => 'bands#remove_request', as: 'remove_band_request'
-  post 'bands/:id/join' => 'bands#join_request', as: 'join_request'
-  post 'bands/:id/invite-artist' => 'bands#invite_artist', as: 'invite_artist'
+  # Band routes
+  resources :bands, only: [:index, :show, :edit, :destroy], id: /[\w\-\.\~]+/
+  get   'create-band'    => 'bands#new',    as: 'new_band'
+  post  'create-band'    => 'bands#create', as: 'create_band'
+  patch 'bands/:id/edit' => 'bands#update', as: 'update_band', id: /[\w\-\.\~]+/
+
+  # Artist: Band request/invitation routes
+  get    'band-requests'          => 'artists#band_requests',          as: 'band_requests'
+  post   'bands/:id/join'         => 'bands#join_request',             as: 'send_band_request'
+  post   'invitations/:id/accept' => 'artists#accept_band_invitation', as: 'accept_band_invitation'
+  delete 'requests/:id/remove'    => 'artists#remove_band_request',    as: 'remove_band_request'
+  delete 'invitations/:id/remove' => 'artists#remove_band_invitation', as: 'remove_band_invitation'
+
+  # Band->Artist request/invitation routes
+  scope 'bands/:id' do
+    post   'invite/:username'             => 'bands#invite_artist',  as: 'invite_artist'
+    #post   'requests/:username/accept'    => 'bands#accept_request', as: 'accept_request_to_band'
+    #delete 'invitations/:username/remove' => 'bands#remove_request', as: 'invite_artist'
+    #delete 'requests/:username/remove'    => 'bands#remove_request', as: 'invite_artist'
+  end
 
   # Session routes - signin, signout
   get 'signin' => 'session#new', as: 'signin'

@@ -1,6 +1,10 @@
 class ArtistsController < ApplicationController
   before_action :filter_correct_user, only: [:edit, :update]
   before_action :filter_signed_in, only: [:band_requests]
+  before_action :filter_band, only:
+      [:accept_band_invitation, :remove_band_invitation, :remove_band_request]
+  before_action :filter_request, only:
+      [:accept_band_invitation, :remove_band_invitation, :remove_band_request]
 
   def index
 
@@ -64,6 +68,33 @@ class ArtistsController < ApplicationController
     @recieved = @artist.band_requests.from_band
   end
 
+  def accept_band_invitation
+    @request.destroy
+    @artist.band_relations.create(band_id: @band.id)
+    flash[:success] = "You just joined the band!"
+    redirect_to band_path(@band.page)
+  end
+
+  def remove_band_invitation
+    if @request.nil? then
+      flash[:error] = "Such invitation does not exist."
+    else
+      @request.destroy
+      flash[:info] = "Invitation removed."
+    end
+    redirect_to :back
+  end
+
+  def remove_band_request
+    if @request.nil? then
+      flash[:error] = "Such request does not exist."
+    else
+      @request.destroy
+      flash[:info] = "Request removed."
+    end
+    redirect_to :back
+  end
+
   private
 
     def extract_date data, field
@@ -103,6 +134,20 @@ class ArtistsController < ApplicationController
 
     def filter_signed_in
       signed_in?
+      # TODO Change into signed_in_user  @SesstionHelper
+    end
+
+    def filter_band
+      @band = Band.where("lower(page) = ?", params[:id].downcase).take
+      unless @band
+        flash[:error] = "Such band does not exist."
+        redirect_to :back
+      end
+    end
+
+    def filter_request
+      @artist = current_user
+      @request = @artist.band_requests.find_by(band_id: @band.id)
     end
 
 end

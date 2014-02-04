@@ -6,10 +6,10 @@
     <% @recieved.each do |e| %>
       <li>
         <%= link_to e.band.name, controller: :bands, action: :show,id: e.band.page %>
-        <%= link_to "Accept", { controller: :bands, action: :accept_request, id: e.band.page },
+        <%= link_to "Accept", accept_band_invitation_path(e.band.page),
                 method: :post,
                 class: "btn btn-primary btn-small" %>
-        <%= link_to "Discard", { controller: :bands, action: :remove_request, id: e.band.page },
+        <%= link_to "Discard", remove_band_invitation_path(e.band.page),
                 method: :delete,
                 class: "btn btn-secondary btn-small" %>
       </li>
@@ -23,7 +23,7 @@
     <% @sent.each do |e| %>
       <li>
         <%= link_to e.band.name, controller: :bands, action: :show,id: e.band.page %>
-        <%= link_to "Remove", { controller: :bands, action: :remove_request, id: e.band.page },
+        <%= link_to "Remove", remove_band_request_path(e.band.page),
                 method: :delete,
                 class: "btn btn-primary btn-small" %>
       </li>
