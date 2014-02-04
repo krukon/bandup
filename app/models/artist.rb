@@ -30,4 +30,16 @@ class Artist < ActiveRecord::Base
     Digest::SHA1.hexdigest token.to_s
   end
 
+  def get_full_name
+    result = read_attribute(:stage_name)
+    name = get_legal_name
+    return name if result.blank?
+    result += " (" + name + ")" if !name.blank?
+    result.squish
+  end
+
+  def get_legal_name
+    (read_attribute(:first_name).to_s + " " + read_attribute(:last_name).to_s).squish
+  end
+
 end

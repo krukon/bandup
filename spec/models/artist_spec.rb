@@ -99,4 +99,38 @@ describe Artist do
     it { @artist.authenticate("incorrect_password").should == false }
   end
 
+  describe "get_legal_name" do
+    it "with first and last name" do
+      @artist.get_legal_name.should == "First Last"
+    end
+    it "with first name only" do
+      @artist.last_name = nil
+      @artist.get_legal_name.should == "First"
+    end
+    it "with last name only" do
+      @artist.first_name = nil
+      @artist.get_legal_name.should == "Last"
+    end
+    it "without first and last name" do
+      @artist.first_name = nil
+      @artist.last_name = nil
+      @artist.get_legal_name.should == ""
+    end
+  end
+
+  describe "get_full_name" do
+    it "with legal name" do
+      @artist.get_full_name.should == "Stage (First Last)"
+    end
+    it "without legal name" do
+      @artist.first_name = nil
+      @artist.last_name = nil
+      @artist.get_full_name.should == "Stage"
+    end
+    it "without stage name" do
+      @artist.stage_name = nil
+      @artist.get_full_name.should == "First Last"
+    end
+  end
+
 end
