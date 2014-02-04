@@ -133,4 +133,16 @@ describe Artist do
     end
   end
 
+  describe "get_printable_name" do
+    it "with full name" do
+      @artist.get_printable_name.should == "Stage (First Last)"
+    end
+    it "without full name" do
+      @artist.first_name = nil
+      @artist.last_name = nil
+      @artist.stage_name = nil
+      @artist.get_printable_name.should == "fake"
+    end
+  end
+
 end

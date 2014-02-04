@@ -42,4 +42,10 @@ class Artist < ActiveRecord::Base
     (read_attribute(:first_name).to_s + " " + read_attribute(:last_name).to_s).squish
   end
 
+  def get_printable_name
+    result = get_full_name
+    result = read_attribute(:username) if result.blank?
+    result.squish
+  end
+
 end
