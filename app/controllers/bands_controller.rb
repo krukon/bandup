@@ -4,6 +4,8 @@ class BandsController < ApplicationController
   before_action :filter_signed_in, only: [:new, :create]
   before_action :filter_owner, only: [:edit, :update, :destroy]
   before_action :filter_has_request, only: [:accept_request, :remove_request]
+  before_action :filter_can_request_join, only: [:join_request]
+  before_action :filter_can_be_invited, only: [:invite_artist]
 
   def index
 
@@ -105,6 +107,18 @@ class BandsController < ApplicationController
     redirect_to :back
   end
 
+  def join_request
+    @band.artist_requests.create(artist_id: current_user.id, artist_accepted: true)
+    flash[:success] = "Request sent."
+    redirect_to :back
+  end
+
+  def invite_artist
+    @band.artist_requests.create(artist_id: @artist.id, band_accepted: true)
+    flash[:success] = "Invitation sent."
+    redirect_to :back
+  end
+
   private
 
     def filter_signed_in
@@ -130,6 +144,29 @@ class BandsController < ApplicationController
         flash[:error] = "Such request does not exist"
         redirect_to :back
         return
+      end
+    end
+
+    def filter_can_request_join
+      @band = Band.where("lower(page) = ?", params[:id].downcase).take
+      member = member? @band
+      requested = requested? @band
+      if member or requested then
+        flash[:error] = "You are already a member of this band." if member
+        flash[:error] = "You have already sent a join request" if requested
+        redirect_to action: :show, id: @band.page
+      end
+    end
+
+    def filter_can_be_invited
+      @band = Band.where("lower(page) = ?", params[:id].downcase).take
+      @artist = Artist.find_by(username: params[:username])
+      member = member? @band, @artist
+      requested = requested? @band, @artist
+      if member or requested then
+        flash[:error] = "This artist is already a member of this band." if member
+        flash[:error] = "This artist has already got a join request." if requested
+        redirect_to action: :show, id: @band.page
       end
     end
 

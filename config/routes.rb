@@ -19,6 +19,8 @@ Bandup::Application.routes.draw do
                     constraints: { id: /[\w\-\.\~]+/}
   post 'bands/:id/accept-request' => 'bands#accept_request', as: 'accept_band_request'
   delete 'bands/:id/remove-request' => 'bands#remove_request', as: 'remove_band_request'
+  post 'bands/:id/join' => 'bands#join_request', as: 'join_request'
+  post 'bands/:id/invite-artist' => 'bands#invite_artist', as: 'invite_artist'
 
   # Session routes - signin, signout
   get 'signin' => 'session#new', as: 'signin'

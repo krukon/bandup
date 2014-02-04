@@ -3,7 +3,11 @@
     <div class="span12">
       <h1><%= @band.name %></h1>
       <% if owner? @band then %>
-        <%= link_to "Edit", controller: :bands, action: :edit, id: @band.page %>
+        <%= link_to "Edit", edit_band_path(id: @band.page) %>
+      <% end %>
+      <% unless member? @band or requested? @band %>
+        <%= link_to "Try to join the band!", join_request_path(id: @band.page),
+                method: :post %>
       <% end %>
     </div>
   </div>
