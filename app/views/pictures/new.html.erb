@@ -1,0 +1,23 @@
+<div class="container">
+	<div class="row">
+		<div class="span8 offset2">
+			<h1>Upload picture</h1>
+			<%= form_for @picture, html: { multipart: true } do |f| %>
+				<%= render '/bands/form_errors', object: f.object %>
+				<%= f.label :title %>
+				<%= f.text_field :title %>
+				
+				<%= f.label :description %>
+				<%= f.text_area :description %>
+				<br/>
+				<%= f.file_field :picture %>
+
+				<%= f.submit raw("&#xf093; Upload"),
+					class: "btn btn-primary btn-submit" %>
+			<% end %>
+			<%= link_to raw("<i class=\"icon icon-arrow-left\"> </i>Back"),
+				pictures_path,
+				class: "btn" %>
+		</div>
+	</div>
+</div>

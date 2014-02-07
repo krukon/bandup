@@ -1,0 +1,28 @@
+<div class="container">
+	<div class="row">
+		<div class="span8 offset2">
+			<h1>Edit picture</h1>
+			<div class="row">
+				<div class="span5">
+					<%= form_for @picture, html: { multipart: true } do |f| %>
+						<%= render '/bands/form_errors', object: f.object %>
+						<%= f.label :title %>
+						<%= f.text_field :title %>
+						
+						<%= f.label :description %>
+						<%= f.text_area :description %>
+
+						<%= f.submit raw("&#xf00c; Update"),
+							class: "btn btn-primary btn-submit" %>
+					<% end %>
+					<%= link_to raw("#{icon "arrow-left"} Back"),
+						pictures_path,
+						class: "btn" %>
+				</div>
+				<div class="span3">
+					<%= image_tag @picture.picture.url(:medium) %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,16 @@
+<div class="container">
+	<div class="row">
+		<div class="span8 offset2">
+			<h1>Pictures</h1>
+			<%= link_to raw("#{icon "picture"}Upload picture"),
+						new_picture_path,
+						class: "btn btn-success" %>
+			<div>
+				<h3>Recently uploaded</h3>
+				<% @recent.each do |e| %>
+					<%= link_to (image_tag e.picture.url(:thumb), alt: e.title), picture_path(e) %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>

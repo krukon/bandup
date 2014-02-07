@@ -40,6 +40,9 @@ Bandup::Application.routes.draw do
   post 'signin' => 'session#create', as: 'create_session'
   delete 'signout' => 'session#destroy', as: 'signout'
 
+  # Pictures controller routes
+  resources :pictures, path_names: { new: 'upload', create: 'upload' }
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
