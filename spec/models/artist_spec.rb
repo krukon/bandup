@@ -24,6 +24,8 @@ describe Artist do
   it { should respond_to(:link_youtube) }
   it { should respond_to(:link_website) }
   it { should respond_to(:remember_token) }
+  it { should respond_to(:profile_picture) }
+  it { should respond_to(:cover_picture) }
 
   it { should be_valid }
   it { should_not be_admin }

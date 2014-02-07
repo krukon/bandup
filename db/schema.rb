@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140201135441) do
+ActiveRecord::Schema.define(version: 20140207103600) do
 
   create_table "artist_band_join_requests", force: true do |t|
     t.integer  "artist_id"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20140201135441) do
     t.string   "password_digest"
     t.string   "stage_name"
     t.string   "about"
-    t.boolean  "admin",           default: false
+    t.boolean  "admin",              default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "username"
@@ -71,6 +71,8 @@ ActiveRecord::Schema.define(version: 20140201135441) do
     t.string   "link_youtube"
     t.string   "link_website"
     t.string   "remember_token"
+    t.integer  "profile_picture_id"
+    t.integer  "cover_picture_id"
   end
 
   add_index "artists", ["email"], name: "index_artists_on_email", unique: true
@@ -100,5 +102,19 @@ ActiveRecord::Schema.define(version: 20140201135441) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "pictures", force: true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.integer  "artist_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
+  end
+
+  add_index "pictures", ["artist_id"], name: "index_pictures_on_artist_id"
 
 end
