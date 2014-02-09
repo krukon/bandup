@@ -42,6 +42,10 @@ Bandup::Application.routes.draw do
 
   # Pictures controller routes
   resources :pictures, path_names: { new: 'upload', create: 'upload' }
+  get 'artists/:username/pictures'     => 'pictures#artist_index',    as: 'artist_pictures'
+  get 'artists/:username/pictures/:id' => 'pictures#artist_show',     as: 'artist_picture'
+  get 'select-profile-picture'         => 'pictures#select_profile',  as: 'select_profile_picture'
+  get 'select-profile-picture/:id'     => 'pictures#change_profile',  as: 'change_profile_picture'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row">
+    <div class="span8 offset2">
+      <h2><%= @artist.get_printable_name %> - Pictures</h2>
+      <div>
+        <% @pictures.each do |e| %>
+          <%= link_to (image_tag e.picture.url(:thumb), alt: e.title),
+            artist_picture_path(id: e.id, username: @artist.username) %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,9 +1,7 @@
-<% if @image != nil then %>
-	<div class="img-polaroid profile-picture-frame pull-left">
-		<div class="profile-picture" style="background-image: url('/assets/<%= @image %>');">
-		</div>
+<div class="img-polaroid profile-picture-frame pull-left">
+	<div class="profile-picture" style="background-image: url('<%= @profile_picture %>');">
 	</div>
-<% end %>
+</div>
 
 <% if !@artist.stage_name.blank? then %>
 	<h1><%= @artist.stage_name %></h1>

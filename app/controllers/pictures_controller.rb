@@ -1,7 +1,9 @@
 class PicturesController < ApplicationController
   before_action :signed_in_user
-  before_action :filter_picture, only: [:show, :edit, :update, :destroy]
-  before_action :filter_owner, only: [:edit, :update, :destroy]
+  before_action :filter_artist, only: [:artist_index, :artist_show]
+  before_action :filter_picture, only: [:show, :edit, :update, :destroy,
+    :artist_show, :change_profile]
+  before_action :filter_owner, only: [:edit, :update, :destroy, :change_profile]
 
   def index
     @recent = Picture.order("id DESC").limit(10)
@@ -33,7 +35,7 @@ class PicturesController < ApplicationController
   end
 
   def show
-
+    @back_path = pictures_path()
   end
 
   def destroy
@@ -42,6 +44,27 @@ class PicturesController < ApplicationController
     @picture.destroy
     flash[:success] = "Picture deleted successfully."
     redirect_to pictures_path
+  end
+
+  def artist_index
+    @pictures = @artist.pictures.order("id DESC")
+  end
+
+  def artist_show
+    @back_path = artist_pictures_path(@artist.username)
+    render 'show'
+  end
+
+  def select_profile
+    @artist = current_user
+    @pictures = @artist.pictures.order("id DESC")
+  end
+
+  def change_profile
+    @artist = current_user
+    @artist.profile_picture_id = @picture.id
+    @artist.save
+    redirect_to artist_path(@artist.username)
   end
 
   private
@@ -65,8 +88,16 @@ class PicturesController < ApplicationController
     def filter_owner
       @artist = current_user
       unless @artist.id == @picture.artist_id
-        flash[:error] = "You do not have permission to modify this picture."
+        flash[:error] = "This is not a picture of yours."
         redirect_to :back
+      end
+    end
+
+    def filter_artist
+      @artist = Artist.find_by(username: params[:username])
+      unless @artist
+        flash[:error] = "Such artist does not exist."
+        redirect_to pictures_path
       end
     end
 

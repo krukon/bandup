@@ -9,7 +9,7 @@
       </p>
       <p>
         <%= link_to raw("<i class=\"icon icon-arrow-left\"> </i>Back to pictures"),
-          pictures_path, class: "btn" %>
+          @back_path, class: "btn" %>
         <% if picture_owner? @picture then %>
           <%= link_to raw("<i class=\"icon icon-edit\"> </i>Edit picture"),
             edit_picture_path(@picture), class: "btn btn-primary" %>
