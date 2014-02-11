@@ -1,0 +1,8 @@
+<div class="row">
+	<div class="span8 offset2">
+		<h1>Recent posts</h1>
+		<% @recent.each do |e| %>
+			<%= render 'post', object: { post: e, small: true } %>
+		<% end %>
+	</div>
+</div>

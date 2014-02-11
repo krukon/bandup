@@ -35,6 +35,9 @@ Bandup::Application.routes.draw do
     delete 'requests/:username/remove'    => 'bands#remove_request',    as: 'remove_request_to_band'
   end
 
+  # Post routes (temporarily)
+  resources :posts, except: [:edit, :update]
+
   # Session routes - signin, signout
   get 'signin' => 'session#new', as: 'signin'
   post 'signin' => 'session#create', as: 'create_session'

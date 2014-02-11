@@ -1,0 +1,32 @@
+<% post = object[:post] %>
+<div class="post <%= "mini" if object[:small] %>">
+  <div class="post-header">
+    <span class="post-author">
+      <%= link_to post.artist.get_printable_name, artist_path(post.artist.username) %>
+    </span>
+    <span class="post-date">
+      <%= post.updated_at.to_s %>
+    </span>
+  </div>
+  <div class="post-main">
+    <%= image_tag "/system/pictures/thumb/f57a579b7f903ec30b655aeb6ed25d7dbb0912fc.JPG",
+      alt: post.artist.get_printable_name, class: "post-profile" %>
+    <div class="post-body">
+      <div class="post-content">
+        <%= simple_format(post.content) %>
+      </div>
+      <% video = post_find_video post.content %>
+      <% if video %>
+        <div class="post-video">
+          <%= video %>
+        </div>
+      <% end %>
+      <% if current_user.id == post.artist_id %>
+        <div class="post-delete">
+          <%= link_to raw("<i class=\"icon icon-trash\"> </i>Remove"), post_path(post),
+              method: :delete, class: "btn btn-mini btn-danger" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
