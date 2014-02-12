@@ -24,7 +24,7 @@
 }
 
 .post-main {
-
+	min-height: 80px;
 }
 
 img.post-profile {
@@ -74,6 +74,10 @@ img.post-profile {
 		margin-right: 5px;
 	}
 
+	.post-main {
+		min-height: 40px;
+	}
+
 	.post-body {
 		margin-left: 50px;
 		width: 295px;
@@ -84,3 +88,22 @@ img.post-profile {
 		height: 166px;
 	}
 }
+
+.post-new {
+	width: 500px;
+}
+
+.post-new textarea {
+	width: 486px;
+	max-width: 486px;
+}
+
+.post-new.mini {
+	width: 350px;
+
+	textarea {
+		width: 336px;
+	}
+}
+
+	

@@ -5,6 +5,7 @@ class PostsController < ApplicationController
 
   def index
     @recent = Post.order("id DESC").limit(20)
+    @post = Post.new
   end
 
   def new
@@ -15,6 +16,8 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.artist = current_user
     @post.save
+    flash[:success] = "Post created successfully."
+    redirect_to posts_path
   end
 
   def show
@@ -23,13 +26,14 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
+    flash[:info] = "Post removed successfully."
     redirect_to :back
   end
 
   private
 
     def post_params
-      params.require(:post).permit(:content, :link, :picture)
+      params.require(:post).permit(:content, :picture)
     end
 
     def filter_post

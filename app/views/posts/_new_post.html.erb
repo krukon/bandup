@@ -1,0 +1,7 @@
+<div class="post-new <%= "mini" if object[:small] %>">
+  <%= form_for(object[:post]) do |f| %>
+    <%= f.text_area :content, placeholder: "Type your post here..." %>
+
+    <%= f.submit "Post", class: "btn btn-primary btn-submit" %>
+  <% end %>
+</div>
