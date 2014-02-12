@@ -3,7 +3,7 @@
 This project is currently under developement.
 
 The most up-to-date running version can be found at
-...
+http://bandup.herokuapp.com/
 
 == Band UP
 
