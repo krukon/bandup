@@ -37,6 +37,7 @@ class ArtistsController < ApplicationController
 
     @artist = Artist.create!(username: username, email: email, password: password)
 
+    signed_in @artist
     redirect_to action: :edit, id: @artist.username
   end
 

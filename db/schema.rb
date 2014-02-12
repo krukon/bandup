@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 20140209124727) do
     t.datetime "updated_at"
   end
 
-  add_index "artist_band_join_requests", ["artist_id"], name: "index_artist_band_join_requests_on_artist_id"
-  add_index "artist_band_join_requests", ["band_id"], name: "index_artist_band_join_requests_on_band_id"
+  add_index "artist_band_join_requests", ["artist_id"], name: "index_artist_band_join_requests_on_artist_id", using: :btree
+  add_index "artist_band_join_requests", ["band_id"], name: "index_artist_band_join_requests_on_band_id", using: :btree
 
   create_table "artist_band_relations", force: true do |t|
     t.integer  "artist_id"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20140209124727) do
     t.datetime "updated_at"
   end
 
-  add_index "artist_band_relations", ["artist_id", "band_id"], name: "index_artist_band_relations_on_artist_id_and_band_id", unique: true
+  add_index "artist_band_relations", ["artist_id", "band_id"], name: "index_artist_band_relations_on_artist_id_and_band_id", unique: true, using: :btree
 
   create_table "artist_genre_relations", force: true do |t|
     t.integer  "artist_id"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20140209124727) do
     t.datetime "updated_at"
   end
 
-  add_index "artist_genre_relations", ["artist_id", "genre_id"], name: "index_artist_genre_relations_on_artist_id_and_genre_id", unique: true
+  add_index "artist_genre_relations", ["artist_id", "genre_id"], name: "index_artist_genre_relations_on_artist_id_and_genre_id", unique: true, using: :btree
 
   create_table "artist_instrument_relations", force: true do |t|
     t.integer  "artist_id"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20140209124727) do
     t.datetime "updated_at"
   end
 
-  add_index "artist_instrument_relations", ["artist_id", "instrument_id"], name: "uniqueness", unique: true
+  add_index "artist_instrument_relations", ["artist_id", "instrument_id"], name: "uniqueness", unique: true, using: :btree
 
   create_table "artists", force: true do |t|
     t.string   "email"
@@ -75,9 +75,9 @@ ActiveRecord::Schema.define(version: 20140209124727) do
     t.integer  "cover_picture_id"
   end
 
-  add_index "artists", ["email"], name: "index_artists_on_email", unique: true
-  add_index "artists", ["remember_token"], name: "index_artists_on_remember_token"
-  add_index "artists", ["username"], name: "index_artists_on_username", unique: true
+  add_index "artists", ["email"], name: "index_artists_on_email", unique: true, using: :btree
+  add_index "artists", ["remember_token"], name: "index_artists_on_remember_token", using: :btree
+  add_index "artists", ["username"], name: "index_artists_on_username", unique: true, using: :btree
 
   create_table "bands", force: true do |t|
     t.string   "name"
@@ -115,7 +115,7 @@ ActiveRecord::Schema.define(version: 20140209124727) do
     t.datetime "picture_updated_at"
   end
 
-  add_index "pictures", ["artist_id"], name: "index_pictures_on_artist_id"
+  add_index "pictures", ["artist_id"], name: "index_pictures_on_artist_id", using: :btree
 
   create_table "posts", force: true do |t|
     t.string   "content"
