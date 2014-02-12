@@ -6,9 +6,6 @@
 			class: "select-picture" %>
 		<%= link_to "Change profile picture", select_profile_picture_path %>
 		<%= form_for(@artist, url: { action: :update, id: @artist.username }) do |f| %>
-			<%= f.label :username %>
-			<%= f.text_field :username, disabled: true %>
-
 			<%= f.label :email %>
 			<%= f.text_field :email %>
 
@@ -40,13 +37,13 @@
 			<%= f.text_field :link_website %>
 		
 			<%= f.label :birthday %>
-			<%= f.date_select :birthday, start_year: 1940, end_year: Time.now.year %>
+			<%= f.date_field :birthday %>
 
 			<% if f.object.errors[:birthday].count > 0 then %>
 				<span class="text-error"><%= f.object.errors.full_messages_for(:birthday)[0] %></span>
 			<% end %>
 
-			<%= f.submit "Submit changes", class: "btn btn-large btn-primary" %>
+			<%= f.submit "Submit changes", class: "btn btn-primary btn-submit" %>
 		<% end %>
 	</div>
 </div>

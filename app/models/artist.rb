@@ -33,6 +33,16 @@ class Artist < ActiveRecord::Base
     Digest::SHA1.hexdigest token.to_s
   end
 
+  def birthday=(raw)
+    value = nil
+    begin
+      value = raw if raw.class == Date or raw.class == DateTime
+      value = raw.to_date if raw.class == String
+    rescue => e
+    end
+    write_attribute(:birthday, value)
+  end
+
   def get_full_name
     result = read_attribute(:stage_name)
     name = get_legal_name

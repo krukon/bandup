@@ -7,7 +7,7 @@ class ArtistsController < ApplicationController
       [:accept_band_invitation, :remove_band_invitation, :remove_band_request]
 
   def index
-
+    @recent = Artist.order("id DESC").limit(10)
   end
 
 
@@ -98,18 +98,6 @@ class ArtistsController < ApplicationController
 
   private
 
-    def extract_date data, field
-      year = data[field.to_s + '(1i)'].to_i
-      month = data[field.to_s + '(2i)'].to_i
-      day = data[field.to_s + '(3i)'].to_i
-      begin
-        date = DateTime.new(year, month, day)
-      rescue => e
-        return nil
-      end
-      date
-    end
-
     def extract_link link
       link = "http://" + link if !link.starts_with? "http://" and !link.starts_with? "https://"
       link
@@ -125,7 +113,7 @@ class ArtistsController < ApplicationController
       artist.link_facebook = extract_link data[:link_facebook]
       artist.link_youtube = extract_link data[:link_youtube]
       artist.link_website = extract_link data[:link_website]
-      artist.birthday = extract_date data, :birthday
+      artist.birthday = data[:birthday]
     end
 
     def filter_correct_user

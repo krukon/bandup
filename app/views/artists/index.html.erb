@@ -1,1 +1,16 @@
-index
+<div class="row">
+  <div class="span8 offset2">
+    <h1>Artists</h1>
+    <h3>Recently joined</h3>
+    <ul class="icons-ul">
+      <% @recent.each do |e| %>
+        <li>
+          <%= image_tag(e.get_profile_picture(:thumb),
+            alt: e.get_printable_name,
+            class: "bands-artist-profile-thumb") %>
+          <%= link_to e.get_printable_name, artist_path(e.username) %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
