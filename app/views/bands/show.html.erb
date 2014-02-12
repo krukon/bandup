@@ -7,7 +7,7 @@
         <%= link_to "Membership requests", band_requests_path(id: @band.page), class: "btn" %>
         
       <% end %>
-      <% unless member? @band or requested? @band %>
+      <% unless !signed_in? or member? @band or requested? @band %>
         <%= link_to "Try to join the band!", send_band_request_path(id: @band.page),
                 method: :post %>
       <% end %>
@@ -16,14 +16,15 @@
                 class: "btn btn-danger", data: { confirm: "Are you sure?" },
                 method: :delete %> 
       <% end %>
-      <br/>
-      <%= link_to "See the members of this band", band_members_path %>
     </div>
     <div>
+      <h4>About</h4>
       <%= display_string(@band.about) %>
     </div>
     <div>
       <% if @band.artists.count > 0 then %>
+        <h4>Some of the members</h4>
+        <%= link_to "See all the members of this band", band_members_path %>
         <ul class="icons-ul">
           <% @band.artist_relations.shuffle.take(5).each do |rel| %>
             <li>

@@ -2,3 +2,25 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.home-tile {
+  text-align: center;
+}
+
+.home {
+  text-align: center;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+.home-accounts {
+  margin-top: 30px;
+  margin-bottom: 40px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background: linear-gradient(45deg, #020031 0%, #6D3353 100%);
+  color: #fff;
+}
+
+.home-link {
+  margin-bottom: 10px;
+}

@@ -1,1 +1,39 @@
-<h1>This is home page</h1>
+<div class="home">
+  <h1>Band UP - Home page</h1>
+
+  <% if signed_in? %>
+    <div class="home-link"><%= link_to "Artists", artists_path, class: "btn btn-large btn-primary" %></div>
+    <div class="home-link"><%= link_to "Bands", bands_path, class: "btn btn-large btn-primary" %></div>
+    <div class="home-link"><%= link_to "Posts", posts_path, class: "btn btn-large btn-primary" %></div>
+    <div class="home-link"><%= link_to "Pictures", pictures_path, class: "btn btn-large btn-primary" %></div>
+  <% else %>
+    <div class="home-accounts">
+      <%= link_to icon("rocket") + "Create account now!", signup_path, class: "btn btn-large btn-success" %>
+      <h4>Already a member?</h4>
+      <%= link_to icon("signin") + "Sign in!", signin_path, class: "btn btn-primary" %>
+    </div>
+    <div class="row">
+      <div class="span4 home-tile">
+        <h4>Show yourself</h4>
+        <p>
+          Create your own profile, select the instruments you play and
+          your most favorite genres, and share your on-stage experience with everyone.
+        </p>
+      </div>
+      <div class="span4 home-tile">
+        <h4>Discover aritsts around you</h4>
+        <p>
+          Find other artists that play the same music as you do,
+          and the ones that want to create music with you.
+        </p>
+      </div>
+      <div class="span4 home-tile">
+        <h4>Create and join bands</h4>
+        <p>
+          Create the band with your friends and with people that
+          want to join your team.
+        </p>
+      </div>
+    </div>
+  <% end %>
+</div>
