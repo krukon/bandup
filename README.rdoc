@@ -1,28 +1,28 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project is currently under developement.
 
-Things you may want to cover:
+The most up-to-date running version can be found at
+...
 
-* Ruby version
+== Band UP
 
-* System dependencies
+Band UP is a social service created for artists and performers to
+share their on-stage experiences with each others.
 
-* Configuration
+Thanks to this website they will be able to:
 
-* Database creation
+* Find other artists to start their own band
 
-* Database initialization
+* Create the profile for the existing band
 
-* How to run the test suite
+* Send messages and join requests to other bands
 
-* Services (job queues, cache servers, search engines, etc.)
+* Share links to music videos from YouTube and Vimeo
 
-* Deployment instructions
+* List the big events they have participated in
 
-* ...
+* List instruments they can play, so they can be easier
+found by the others
 
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+* List their most favorite genres
