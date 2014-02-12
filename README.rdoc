@@ -5,6 +5,9 @@ This project is currently under developement.
 The most up-to-date running version can be found at
 http://bandup.herokuapp.com/
 
+Username: test
+Password: test
+
 == Band UP
 
 Band UP is a social service created for artists and performers to

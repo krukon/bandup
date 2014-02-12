@@ -1,19 +1,15 @@
-<h1>Artist's Bands</h1>
-<div class="container">
-	<div class="row">
-		<div class="span10 offset1">
-			<% if @bands.count > 0 then %>
-				<ul>
-					<% for band in @bands do %>
-						<li>
-							<%= link_to band.name,
-											controller: :bands,
-											action: :show,
-											id: band.page %>
-						</li>
-					<% end %>
-				</ul>
-			<% end %>
-		</div>
-	</div>
+<div class="row">
+  <div class="span8 offset2">
+    <h1>Artist's Bands</h1>
+    <% if @bands.count > 0 then %>
+      <ul class="icons-ul">
+        <% for band in @bands do %>
+          <li>
+            <%= icon "group icon-li" %>
+            <%= link_to band.name, band_path(band.page) %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
 </div>

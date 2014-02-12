@@ -1,32 +1,36 @@
-<h1>Band requests</h1>
+<div class="row">
+  <div class="span8 offset2">
+    <h1>Band requests</h1>
 
-<% if @recieved.count > 0 then %>
-  <h3>Requests from Bands:</h3>
-  <ul>
-    <% @recieved.each do |e| %>
-      <li>
-        <%= link_to e.band.name, controller: :bands, action: :show,id: e.band.page %>
-        <%= link_to "Accept", accept_band_invitation_path(e.band.page),
-                method: :post,
-                class: "btn btn-primary btn-small" %>
-        <%= link_to "Discard", remove_band_invitation_path(e.band.page),
-                method: :delete,
-                class: "btn btn-secondary btn-small" %>
-      </li>
+    <% if @recieved.count > 0 then %>
+      <h3>Requests from Bands:</h3>
+      <ul>
+        <% @recieved.each do |e| %>
+          <li>
+            <%= link_to e.band.name, controller: :bands, action: :show,id: e.band.page %>
+            <%= link_to "Accept", accept_band_invitation_path(e.band.page),
+                    method: :post,
+                    class: "btn btn-primary btn-small" %>
+            <%= link_to "Discard", remove_band_invitation_path(e.band.page),
+                    method: :delete,
+                    class: "btn btn-secondary btn-small" %>
+          </li>
+        <% end %>
+      </ul>
     <% end %>
-  </ul>
-<% end %>
 
-<% if @sent.count > 0 then %>
-  <h3>Requests to Bands:</h3>
-  <ul>
-    <% @sent.each do |e| %>
-      <li>
-        <%= link_to e.band.name, controller: :bands, action: :show,id: e.band.page %>
-        <%= link_to "Remove", remove_band_request_path(e.band.page),
-                method: :delete,
-                class: "btn btn-primary btn-small" %>
-      </li>
+    <% if @sent.count > 0 then %>
+      <h3>Requests to Bands:</h3>
+      <ul>
+        <% @sent.each do |e| %>
+          <li>
+            <%= link_to e.band.name, controller: :bands, action: :show,id: e.band.page %>
+            <%= link_to "Remove", remove_band_request_path(e.band.page),
+                    method: :delete,
+                    class: "btn btn-primary btn-small" %>
+          </li>
+        <% end %>
+      </ul>
     <% end %>
-  </ul>
-<% end %>
+  </div>
+</div>

@@ -12,6 +12,7 @@
         <%= drop_down "My profile" do %>
           <%= menu_item "View", artist_path(current_user.username) %>
           <%= menu_item "Edit", edit_artist_path(current_user.username) %>
+          <%= menu_item "Band requests", requests_to_band_path %>
         <% end %>
         <%= menu_item "Sign out", signout_path, method: :delete %>
       <% else %>

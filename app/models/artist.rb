@@ -43,6 +43,18 @@ class Artist < ActiveRecord::Base
     write_attribute(:birthday, value)
   end
 
+  def link_facebook=(value)
+    write_attribute(:link_facebook, get_url(value))
+  end
+
+  def link_youtube=(value)
+    write_attribute(:link_youtube, get_url(value))
+  end
+
+  def link_website=(value)
+    write_attribute(:link_website, get_url(value))
+  end
+
   def get_full_name
     result = read_attribute(:stage_name)
     name = get_legal_name
@@ -62,8 +74,14 @@ class Artist < ActiveRecord::Base
   end
 
   def get_profile_picture type
-    return "fake.jpg" unless profile_picture && type.class == Symbol
+    return "/assets/fake.jpg" unless profile_picture && type.class == Symbol
     profile_picture.picture.url(type)
   end
+
+  private
+
+    def get_url(value)
+      ("http://" if value.squish.scan(/\Ahttps?:\/{2}/).count == 0).to_s + value
+    end
 
 end
