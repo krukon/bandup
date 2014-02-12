@@ -27,12 +27,7 @@ class BandsController < ApplicationController
   end
 
   def create
-    data = params[:band]
-    name = data[:name]
-    page = data[:page]
-    established = data[:established]
-    
-    @band = Band.new(name: name, page: page, established: established)
+    @band = Band.new(create_band_params)
 
     if @band.save then
       current_user.band_relations.create(band_id: @band.id, owner: true)
@@ -48,13 +43,7 @@ class BandsController < ApplicationController
   end
 
   def update
-    data = params[:band]
-
-    @band.name = data[:name]
-    @band.about = data[:about]
-    @band.established = data[:established]
-
-    if @band.save then
+    if @band.update_attributes(update_band_params) then
       flash[:success] = "Band edited successfully."
       redirect_to action: :show, id: @band.page
       return
@@ -121,6 +110,14 @@ class BandsController < ApplicationController
   end
 
   private
+
+    def create_band_params
+      params.require(:band).permit(:name, :page, :established)
+    end
+
+    def update_band_params
+      params.require(:band).permit(:name, :page, :established, :update)
+    end
 
     def filter_band
       @band = Band.where("lower(page) = ?", params[:id].downcase).take

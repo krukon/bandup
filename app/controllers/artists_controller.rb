@@ -46,8 +46,7 @@ class ArtistsController < ApplicationController
   end
 
   def update
-    @artist.update_attributes(update_artist_params)
-    if @artist.save then
+    if @artist.update_attributes(update_artist_params) then
       flash[:success] = "Profile updated."
       redirect_to action: :show, id: @artist.username
     else

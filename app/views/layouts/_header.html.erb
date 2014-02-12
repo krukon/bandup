@@ -14,6 +14,11 @@
           <%= menu_item "Edit", edit_artist_path(current_user.username) %>
           <%= menu_item "Band requests", requests_to_band_path %>
         <% end %>
+        <%= drop_down "My bands" do %>
+          <% current_user.bands.each do |band| %>
+            <%= menu_item band.name, band_path(band.page) %>
+          <% end %>
+        <% end %>
         <%= menu_item "Sign out", signout_path, method: :delete %>
       <% else %>
         <%= menu_item "Sign in!", signin_path %>

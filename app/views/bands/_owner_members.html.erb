@@ -1,7 +1,7 @@
 <ul class="icons-ul">
   <% @band.artists.each do |e| %>
-    <li>
-      <i class="icon-li icon-user"></i>
+    <li class="band-member">
+      <%= image_tag e.get_profile_picture(:thumb), alt: e.get_printable_name %>
       <% link_text = e.get_full_name %>
       <% link_text = e.username if link_text.blank? %>
       <%= link_to link_text, artist_path(id: e.username) %>
