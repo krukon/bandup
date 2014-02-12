@@ -1,4 +1,17 @@
-<h1>Band's index</h1>
-<% if signed_in? then %>
-	<%= link_to "Create new band!", action: :new %>
-<% end %>
+<div class="row">
+  <div class="span8 offset2">
+    <h1>Bands</h1>
+    <% if signed_in? then %>
+      <%= link_to "Create new band!", action: :new %>
+    <% end %>
+    <h3>Recently created</h3>
+    <ul class="icons-ul">
+      <% @recent.each do |e| %>
+        <li>
+          <%= icon("group icon-li") %>
+          <%= link_to e.name, band_path(e.page) %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

@@ -1,12 +1,14 @@
 <div class="row">
   <div class="span8 offset2">
-    <h1><%= @band.name %> - Membership requests</h1>
-    <h3>Invite</h3>
+    <h1><%= @band.name %></h1>
+    <h2>Membership requests</h2>
+    <%= link_to "Back", band_path(@band.page), class: "btn" %>
+    <h4>Invite</h4>
     <%= form_for :invitation, url: invite_artist_path(id: @band.page) do |f| %>
       <%= f.text_field :username, placeholder: "Username of Artist to invite", name: "username" %>
       <%= f.submit "Invite", class: "btn btn-primary" %>
     <% end %>
-    <h3>Received from artists</h3>
+    <h4>Received from artists</h4>
     <ul>
       <% @received.each do |e| %>
         <li>
@@ -22,7 +24,7 @@
         </li>
       <% end %>
     </ul>
-    <h3>Sent to artists</h3>
+    <h4>Sent to artists</h4>
     <ul>
       <% @sent.each do |e| %>
         <li>

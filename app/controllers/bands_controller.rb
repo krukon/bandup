@@ -15,7 +15,7 @@ class BandsController < ApplicationController
   before_action :filter_invitation, only: [:remove_invitation]
 
   def index
-
+    @recent = Band.order("id DESC").take(10)
   end
 
   def show
