@@ -22,7 +22,6 @@ Thanks to this website they will be able to:
 
 * List the big events they have participated in
 
-* List instruments they can play, so they can be easier
-found by the others
+* List instruments they can play, so they can be easier found by the others
 
 * List their most favorite genres
