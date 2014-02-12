@@ -35,10 +35,16 @@ class ArtistsController < ApplicationController
     email = data[:email]
     password = data[:password]
 
-    @artist = Artist.create!(username: username, email: email, password: password)
+    @artist = Artist.new(username: username, email: email, password: password)
 
-    signed_in @artist
-    redirect_to action: :edit, id: @artist.username
+    if @artist.save
+      flash[:success] = "Account created successfully."
+      sign_in @artist
+      redirect_to action: :edit, id: @artist.username
+    else
+      flash[:error] = @artist.errors.full_messages.join(', ')
+      render 'new'
+    end
   end
 
   def edit
