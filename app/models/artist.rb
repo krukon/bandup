@@ -51,4 +51,9 @@ class Artist < ActiveRecord::Base
     result.squish
   end
 
+  def get_profile_picture type
+    return "fake.jpg" unless profile_picture && type.class == Symbol
+    profile_picture.picture.url(type)
+  end
+
 end

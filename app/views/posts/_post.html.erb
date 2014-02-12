@@ -9,11 +9,11 @@
     </span>
   </div>
   <div class="post-main">
-    <%= image_tag "/system/pictures/thumb/f57a579b7f903ec30b655aeb6ed25d7dbb0912fc.JPG",
+    <%= image_tag post.artist.get_profile_picture(:thumb),
       alt: post.artist.get_printable_name, class: "post-profile" %>
     <div class="post-body">
       <div class="post-content">
-        <%= simple_format(post.content) %>
+        <%= display_string(post.content) %>
       </div>
       <% video = post_find_video post.content %>
       <% if video %>
@@ -23,7 +23,7 @@
       <% end %>
       <% if current_user.id == post.artist_id %>
         <div class="post-delete">
-          <%= link_to raw("<i class=\"icon icon-trash\"> </i>Remove"), post_path(post),
+          <%= link_to icon("trash") + "Remove", post_path(post),
               method: :delete, class: "btn btn-mini btn-danger" %>
         </div>
       <% end %>
