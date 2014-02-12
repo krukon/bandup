@@ -64,7 +64,7 @@ class PicturesController < ApplicationController
     @artist = current_user
     @artist.profile_picture_id = @picture.id
     @artist.save
-    redirect_to artist_path(@artist.username)
+    redirect_to edit_artist_path(@artist.username)
   end
 
   private

@@ -2,8 +2,9 @@
 
 <div class="row">
 	<div class="span6 offset3">
-		<%= image_tag @artist.profile_picture.picture.url(:thumb), alt: "Current picture" %>
-		<%= link_to "Change profile picture", select_profile_picture_path(r: ) %>
+		<%= image_tag @artist.profile_picture.picture.url(:thumb), alt: "Current picture",
+			class: "select-picture" %>
+		<%= link_to "Change profile picture", select_profile_picture_path %>
 		<%= form_for(@artist, url: { action: :update, id: @artist.username }) do |f| %>
 			<%= f.label :username %>
 			<%= f.text_field :username, disabled: true %>

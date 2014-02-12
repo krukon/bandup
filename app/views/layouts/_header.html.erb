@@ -1,10 +1,18 @@
 <div class="container">
   <%= nav_bar brand: "Band UP!", inverse: false do %>
     <%= menu_group do %>
-      <%= menu_item "Home", root_path %>
+      <%= drop_down "Go to" do %>
+        <%= menu_item "Home", root_path %>
+        <%= menu_item "Artists", artists_path %>
+        <%= menu_item "Bands", bands_path %>
+        <%= menu_item "Pictures", pictures_path %>
+        <%= menu_item "Posts", posts_path %>
+      <% end %>
       <% if signed_in? then %>
-        <%= menu_item "My profile", artist_path(id: current_user.username) %>
-        <%= menu_item "My bands", bands_of_artist_path(id: current_user.username) %>
+        <%= drop_down "My profile" do %>
+          <%= menu_item "View", artist_path(current_user.username) %>
+          <%= menu_item "Edit", edit_artist_path(current_user.username) %>
+        <% end %>
         <%= menu_item "Sign out", signout_path, method: :delete %>
       <% else %>
         <%= menu_item "Sign in!", signin_path %>

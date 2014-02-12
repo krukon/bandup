@@ -2,8 +2,11 @@
   <div class="row">
     <div class="span8 offset2">
       <h3>Select new profile picture</h3>
+      <div>
+      	<%= link_to "Back", edit_artist_path(current_user.username), class: "btn" %>
+      </div>
       <% @pictures.each do |e| %>
-        <%= link_to (image_tag e.picture.url(:thumb), alt: e.title, class: "picture2"),
+        <%= link_to (image_tag e.picture.url(:thumb), alt: e.title, class: "select-picture"),
          change_profile_picture_path(e) %>
       <% end %>
     </div>
