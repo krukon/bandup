@@ -30,6 +30,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'bcrypt-ruby', '3.0.1'
 gem "twitter-bootstrap-rails"
 gem 'font-awesome-sass'
+gem "paperclip", "~> 3.0"
 
 group :development, :test do
 	gem 'rspec-rails', '~> 3.0.0.beta'

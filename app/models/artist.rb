@@ -8,6 +8,9 @@ class Artist < ActiveRecord::Base
   has_many :instruments, through: :instrument_relations
   has_many :genre_relations, class_name: "ArtistGenreRelation", dependent: :destroy
   has_many :genres, through: :genre_relations
+  has_many :pictures, class_name: "Picture", dependent: :destroy
+  belongs_to :profile_picture, class_name: "Picture", dependent: :destroy
+  belongs_to :cover_picture, class_name: "Picture", dependent: :destroy
 
 
   validates :username, presence: true,

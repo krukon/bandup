@@ -15,4 +15,5 @@
 /log/*.log
 /tmp
 
+# Ignore uploaded pictures
 /public/system

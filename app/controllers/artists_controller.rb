@@ -17,7 +17,8 @@ class ArtistsController < ApplicationController
     if (@artist == nil) then
       redirect_to artists_path
     end
-    @image = "fake.jpg";
+    @profile_picture = @artist.profile_picture ?
+      @artist.profile_picture.picture.url(:medium) : "/assets/fake.jpg";
     @age = ((DateTime.now - @artist.birthday.to_datetime) / 365).to_i if @artist.birthday != nil;
     @link_facebook = @artist.link_facebook
     @link_youtube = @artist.link_youtube
